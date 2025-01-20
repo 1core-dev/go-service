@@ -1,6 +1,6 @@
 # Build the Go binary
-FROM golang:1.22.3 as builder
-ENV CGO_ENABLED 0
+FROM golang:1.22.3 AS builder
+ENV CGO_ENABLED=0
 ARG BUILD_REF
 
 # Create the service directory and copy the module files first and then
