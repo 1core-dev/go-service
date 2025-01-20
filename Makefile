@@ -3,8 +3,24 @@ SHELL_PATHS := /bin/ash /bin/zsh /bin/bash
 SHELL := $(firstword $(wildcard $(SHELL_PATHS)))
 
 # Define images/dependencies
-KIND_CLUSTER := starter-cluster
 KIND := kindest/node:v1.29.12
+
+KIND_CLUSTER := starter-cluster
+BASE_IMAGE_NAME := baseimage/service
+SERVICE_NAME    := sales-api
+VERSION         := 0.0.1
+SERVICE_IMAGE   := $(BASE_IMAGE_NAME)/$(SERVICE_NAME):$(VERSION)
+
+# ==============================================================================
+all: service
+
+service:
+	docker build \
+	-f zarf/docker/Dockerfile.service \
+	-t $(SERVICE_IMAGE) \
+	--build-arg BUILD_REF=$(VERSION) \
+	--build-arg BUILD_DATE=`date -u +"%d-%m-%YT%H:%M:%SZ"` \
+	.
 
 run: 
 	go run app/services/sales-api/main.go | go run app/tooling/logfmt/main.go
