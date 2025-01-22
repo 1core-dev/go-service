@@ -71,6 +71,16 @@ func run(ctx context.Context, log *logger.Logger) error {
 		return fmt.Errorf("passing config: %w", err)
 	}
 
+	// App starting
+	log.Info(ctx, "starting service", "version", build)
+	defer log.Info(ctx, "shutdown complete")
+
+	out, err := conf.String(&cfg)
+	if err != nil {
+		return fmt.Errorf("generating config for output: %w", err)
+	}
+	log.Info(ctx, "startup", "config", out)
+
 	shutdown := make(chan os.Signal, 1)
 	signal.Notify(shutdown, syscall.SIGINT, syscall.SIGTERM)
 	sig := <-shutdown
