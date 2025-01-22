@@ -26,4 +26,4 @@ spec:
             - name: GOMAXPROCS
               valueFrom:
                 resourceFieldRef:
-                  resource: limit.cpu
+                  resource: limits.cpu
