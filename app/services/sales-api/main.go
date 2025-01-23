@@ -12,6 +12,7 @@ import (
 	"syscall"
 	"time"
 
+	v1 "github.com/1core-dev/go-service/business/web/v1"
 	"github.com/1core-dev/go-service/business/web/v1/debug"
 	"github.com/1core-dev/go-service/foundation/logger"
 	"github.com/ardanlabs/conf/v3"
@@ -101,9 +102,17 @@ func run(ctx context.Context, log *logger.Logger) error {
 	shutdown := make(chan os.Signal, 1)
 	signal.Notify(shutdown, syscall.SIGINT, syscall.SIGTERM)
 
+	cfgMux := v1.APIMuxConfig{
+		Build:    build,
+		Shutdown: shutdown,
+		Log:      log,
+	}
+
+	apiMux := v1.APIMux(cfgMux)
+
 	api := http.Server{
 		Addr:         cfg.Web.APIHost,
-		Handler:      nil,
+		Handler:      apiMux,
 		ReadTimeout:  cfg.Web.ReadTimeout,
 		WriteTimeout: cfg.Web.WriteTimeout,
 		IdleTimeout:  cfg.Web.IdleTimeout,
