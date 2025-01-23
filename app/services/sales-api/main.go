@@ -14,6 +14,7 @@ import (
 
 	v1 "github.com/1core-dev/go-service/business/web/v1"
 	"github.com/1core-dev/go-service/business/web/v1/debug"
+	"github.com/1core-dev/go-service/business/web/v1/handlers"
 	"github.com/1core-dev/go-service/foundation/logger"
 	"github.com/ardanlabs/conf/v3"
 )
@@ -108,7 +109,7 @@ func run(ctx context.Context, log *logger.Logger) error {
 		Log:      log,
 	}
 
-	apiMux := v1.APIMux(cfgMux)
+	apiMux := v1.APIMux(cfgMux, handlers.Routes{})
 
 	api := http.Server{
 		Addr:         cfg.Web.APIHost,
