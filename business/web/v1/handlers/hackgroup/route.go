@@ -3,10 +3,10 @@ package hackgroup
 import (
 	"net/http"
 
-	"github.com/dimfeld/httptreemux/v5"
+	"github.com/1core-dev/go-service/foundation/web"
 )
 
 // Routes add specific routes for this gropu.
-func Routes(mux *httptreemux.ContextMux) {
-	mux.Handle(http.MethodGet, "/hack", Hack)
+func Routes(app *web.App) {
+	app.Handle(http.MethodGet, "/hack", Hack)
 }
