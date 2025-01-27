@@ -12,9 +12,9 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/1core-dev/go-service/app/services/sales-api/v1/handlers"
 	v1 "github.com/1core-dev/go-service/business/web/v1"
 	"github.com/1core-dev/go-service/business/web/v1/debug"
-	"github.com/1core-dev/go-service/business/web/v1/handlers"
 	"github.com/1core-dev/go-service/foundation/logger"
 	"github.com/ardanlabs/conf/v3"
 )

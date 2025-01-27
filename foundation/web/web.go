@@ -16,8 +16,8 @@ type App struct {
 	mw       []Middleware
 }
 
-// Hadler is a type that handles a http request within own "mini framework".
-type Hadler func(ctx context.Context, w http.ResponseWriter, r *http.Request) error
+// Handler is a type that handles a http request within own "mini framework".
+type Handler func(ctx context.Context, w http.ResponseWriter, r *http.Request) error
 
 // NewApp created an App value that handle as et og routes for the application.
 func NewApp(shutdown chan os.Signal, mw ...Middleware) *App {
@@ -30,7 +30,7 @@ func NewApp(shutdown chan os.Signal, mw ...Middleware) *App {
 
 // Handle sets a handler function for a given HTTP method and path pair
 // to the application server mux.
-func (a *App) Handle(method string, path string, handler Hadler, mw ...Middleware) {
+func (a *App) Handle(method string, path string, handler Handler, mw ...Middleware) {
 	handler = wrapMiddleware(mw, handler)
 	handler = wrapMiddleware(a.mw, handler)
 

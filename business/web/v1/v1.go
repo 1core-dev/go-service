@@ -3,6 +3,7 @@ package v1
 import (
 	"os"
 
+	"github.com/1core-dev/go-service/business/web/v1/middlewares"
 	"github.com/1core-dev/go-service/foundation/logger"
 	"github.com/1core-dev/go-service/foundation/web"
 )
@@ -22,7 +23,7 @@ type RouteAdder interface {
 
 // APIMux constructs a http.Handler will all application routes defined.
 func APIMux(cfg APIMuxConfig, routeAdder RouteAdder) *web.App {
-	app := web.NewApp(cfg.Shutdown)
+	app := web.NewApp(cfg.Shutdown, middlewares.Logger(cfg.Log))
 
 	routeAdder.Add(app, cfg)
 
