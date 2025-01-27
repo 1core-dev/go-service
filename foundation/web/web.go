@@ -1,17 +1,22 @@
 package web
 
 import (
+	"context"
+	"net/http"
 	"os"
 
 	"github.com/dimfeld/httptreemux/v5"
 )
 
-// App is the entrypoint into our application ans what configures our context
+// App is the entrypoint into our application and what configures our context
 // object for each of our http handlers.
 type App struct {
 	*httptreemux.ContextMux
 	shutdown chan os.Signal
 }
+
+// Hadler is a type that handles a http request within own "mini framework".
+type Hadler func(ctx context.Context, w http.ResponseWriter, r *http.Request) error
 
 // NewApp created an App value that handle as et og routes for the application.
 func NewApp(shutdown chan os.Signal) *App {
@@ -19,4 +24,17 @@ func NewApp(shutdown chan os.Signal) *App {
 		ContextMux: httptreemux.NewContextMux(),
 		shutdown:   shutdown,
 	}
+}
+
+// Handle sets a handler function foe a given HTTP method and path pair
+// to the application server mux.
+func (a *App) Handle(method string, path string, handler Hadler) {
+	h := func(w http.ResponseWriter, r *http.Request) {
+		// TODO. Additional logic here
+		if err := handler(r.Context(), w, r); err != nil {
+			return
+		}
+
+	}
+	a.ContextMux.Handle(method, path, h)
 }
