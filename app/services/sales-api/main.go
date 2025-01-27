@@ -16,6 +16,7 @@ import (
 	v1 "github.com/1core-dev/go-service/business/web/v1"
 	"github.com/1core-dev/go-service/business/web/v1/debug"
 	"github.com/1core-dev/go-service/foundation/logger"
+	"github.com/1core-dev/go-service/foundation/web"
 	"github.com/ardanlabs/conf/v3"
 )
 
@@ -31,7 +32,7 @@ func main() {
 	}
 
 	traceIDFunc := func(ctx context.Context) string {
-		return ""
+		return web.GetTraceID(ctx)
 	}
 
 	log = logger.NewWithEvents(os.Stdout, logger.LevelInfo, "SALES-API", traceIDFunc, events)

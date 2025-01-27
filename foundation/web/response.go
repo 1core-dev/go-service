@@ -8,6 +8,8 @@ import (
 
 // Respond convert a Go value to JSON and sends it to client.
 func Respond(ctx context.Context, w http.ResponseWriter, r *http.Request, data any, statusCode int) error {
+	SetStatusCode(ctx, statusCode)
+
 	if statusCode == http.StatusNoContent {
 		w.WriteHeader(statusCode)
 		return nil
