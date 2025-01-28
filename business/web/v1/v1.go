@@ -26,6 +26,7 @@ func APIMux(cfg APIMuxConfig, routeAdder RouteAdder) *web.App {
 	app := web.NewApp(
 		cfg.Shutdown, middlewares.Logger(cfg.Log),
 		middlewares.Errors(cfg.Log),
+		middlewares.Panics(),
 	)
 
 	routeAdder.Add(app, cfg)
