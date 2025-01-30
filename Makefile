@@ -36,6 +36,9 @@ curl:
 load:
 	hey -m GET -c 100 -n 100000 "http://localhost:3000/hack"
 
+genkeys:
+	go run app/tooling/sales-admin/main.go
+
 # ==============================================================================
 # Running from within k8s/kind
 
