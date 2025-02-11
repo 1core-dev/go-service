@@ -17,7 +17,7 @@ import (
 )
 
 // ErrForbidden is returned when a auth issue is identified.
-var ErrForbidden = errors.New("attemped action is not allowed")
+var ErrForbidden = errors.New("attempted action is not allowed")
 
 // Claims represents the authorization claims transmitted via a JWT.
 type Claims struct {
@@ -33,14 +33,14 @@ type KeyLookup interface {
 	PublicKey(kid string) (key string, err error)
 }
 
-// Config represent information required to initializa auth.
+// Config represent information required to initialize auth.
 type Config struct {
 	Log       *logger.Logger
 	KeyLookup KeyLookup
 	Issuer    string
 }
 
-// Auth is esed to authenticate clients. It can generate a token for a set of
+// Auth is used to authenticate clients. It can generate a token for a set of
 // user claims and recreate the claims by parsing token.
 type Auth struct {
 	log       *logger.Logger
@@ -102,7 +102,7 @@ func (a *Auth) Authenticate(ctx context.Context, bearerToken string) (Claims, er
 		return Claims{}, fmt.Errorf("error parsing token: %w", err)
 	}
 
-	// Perfom an extra lelel of authentication verification with OPA.
+	// Perform an extra level of authentication verification with OPA.
 	kidRaw, exists := token.Header["kid"]
 	if !exists {
 		return Claims{}, fmt.Errorf("kid missing from header: %w", err)

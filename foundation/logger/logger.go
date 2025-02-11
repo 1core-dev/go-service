@@ -15,7 +15,7 @@ import (
 // the specific context.
 type TraceIDFunc func(ctx context.Context) string
 
-// Logger represnts a logger for logging inforamtion.
+// Logger represents a logger for logging information.
 type Logger struct {
 	handler     slog.Handler
 	traceIDFunc TraceIDFunc
@@ -37,7 +37,7 @@ func NewWithHandler(h slog.Handler) *Logger {
 	return &Logger{handler: h}
 }
 
-// NewStdLogger returns a standart library Logger that wraps the slog Logger.
+// NewStdLogger returns a standard library Logger that wraps the slog Logger.
 func NewStdLogger(logger *Logger, level Level) *log.Logger {
 	return slog.NewLogLogger(logger.handler, slog.Level(level))
 }

@@ -7,7 +7,7 @@ import (
 )
 
 // This holds the single instance of the metrics value needed for collecting
-// metrics. The expvar package is already based on singletone for
+// metrics. The expvar package is already based on singleton for
 // the different metrics are registered with the package so there isn't
 // much choice here.
 var m *metrics
@@ -22,10 +22,10 @@ type metrics struct {
 	panics     *expvar.Int
 }
 
-// init constructs the metrics value that will be ised to capture metrics.
+// init constructs the metrics value that will be used to capture metrics.
 // The metrics value is stored an a package level variable since everything
-// inside of expvar is regisetered as a singleton. The use of once will make
-// sure this initialization only happends once.
+// inside of expvar is registered as a singleton. The use of once will make
+// sure this initialization only happens once.
 func init() {
 	m = &metrics{
 		goroutines: expvar.NewInt("goroutines"),

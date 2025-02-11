@@ -62,11 +62,11 @@ func (a *App) Handle(method string, path string, handler Handler, mw ...Middlewa
 }
 
 // validateShutdown validates the error for special condition that don't
-// warant an actual shutdown by the system
+// warrant an actual shutdown by the system
 func validateShutdown(err error) bool {
 
 	// Ignore syscall.EPIPE and syscall.ECONNRESET errors which occurs
-	// when a write operation happens on the http.ResponeWriter that
+	// when a write operation happens on the http.ResponseWriter that
 	// has simultaneously been disconnected by the client (TCP
 	// connections is broken). For instance, when large amounts of
 	// data is being written or streamed to the client.

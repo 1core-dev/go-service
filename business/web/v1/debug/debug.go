@@ -7,7 +7,7 @@ import (
 	"net/http/pprof"
 )
 
-// Mux registers all the debug routes from standart library into a new mux
+// Mux registers all the debug routes from standard library into a new mux
 // bypassing the use of the DefaultServerMux. Using the DefaultServerMux would
 // be a security risk since a dependency could inject a handler into our service
 // without us knowing it.

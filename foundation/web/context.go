@@ -9,7 +9,7 @@ type ctxKey int
 
 const key ctxKey = 1
 
-// Values represrnt state for each request.
+// Values represent state for each request.
 type Values struct {
 	TraceID    string
 	Now        time.Time

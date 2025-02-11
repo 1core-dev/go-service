@@ -6,7 +6,7 @@ import (
 	"github.com/1core-dev/go-service/foundation/web"
 )
 
-// Routes add specific routes for this gropu.
+// Routes add specific routes for this group.
 func Routes(app *web.App) {
 	app.Handle(http.MethodGet, "/hack", Hack)
 }

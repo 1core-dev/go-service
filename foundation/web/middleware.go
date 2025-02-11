@@ -1,8 +1,8 @@
 package web
 
 // Middleware is a function design to run some code before and/or after
-// anothe Handler. It is designed to remove boilerplate or other concerns not
-// direct to any Handeler.
+// another Handler. It is designed to remove boilerplate or other concerns not
+// direct to any Handler.
 type Middleware func(Handler) Handler
 
 // wrapMiddleware creates a new handler by wrapping middleware around a final

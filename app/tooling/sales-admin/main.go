@@ -113,7 +113,7 @@ func gentoken() error {
 
 	_, _, err = parser.ParseUnverified(str, &claims3)
 	if err != nil {
-		return fmt.Errorf("error parsing token unver: %w", err)
+		return fmt.Errorf("error parsing token unverified: %w", err)
 	}
 
 	// Marshal the public key from the private key to PKIX.

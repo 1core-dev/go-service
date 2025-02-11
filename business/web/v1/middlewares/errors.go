@@ -9,7 +9,7 @@ import (
 	"github.com/1core-dev/go-service/foundation/web"
 )
 
-// Errors handle errors comming out of the call chain. It detects normal
+// Errors handle errors coming out of the call chain. It detects normal
 // application errors which are used to respond to the client in a uniform way.
 // Unexpected errors (status >= 500) are logged.
 func Errors(log *logger.Logger) web.Middleware {
@@ -41,7 +41,7 @@ func Errors(log *logger.Logger) web.Middleware {
 				}
 
 				// If we receive the shutdown err we need to return it back
-				// to the base handler to shutfown the service.
+				// to the base handler to shutdown the service.
 				if web.IsShutdown(err) {
 					return err
 				}
