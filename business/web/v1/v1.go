@@ -3,6 +3,7 @@ package v1
 import (
 	"os"
 
+	"github.com/1core-dev/go-service/business/web/v1/auth"
 	"github.com/1core-dev/go-service/business/web/v1/middlewares"
 	"github.com/1core-dev/go-service/foundation/logger"
 	"github.com/1core-dev/go-service/foundation/web"
@@ -13,6 +14,7 @@ type APIMuxConfig struct {
 	Build    string
 	Shutdown chan os.Signal
 	Log      *logger.Logger
+	Auth     *auth.Auth
 }
 
 // RouteAdder defines behavior that sets the routes to bind for an instance

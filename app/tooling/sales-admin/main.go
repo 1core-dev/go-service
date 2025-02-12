@@ -10,12 +10,13 @@ import (
 	"encoding/pem"
 	"errors"
 	"fmt"
+	"io"
 	"log"
 	"os"
 	"time"
 
 	"github.com/golang-jwt/jwt/v5"
-	"github.com/open-policy-agent/opa/rego"
+	"github.com/open-policy-agent/opa/v1/rego"
 )
 
 // Core OPA policies.
@@ -35,9 +36,23 @@ func main() {
 func gentoken() error {
 
 	// Generate a new private key.
-	privateKey, err := rsa.GenerateKey(rand.Reader, 2048)
+	file, err := os.Open("zarf/keys/32e0b6e7-1a49-4041-87bc-397c17bbfb16.pem")
 	if err != nil {
-		return fmt.Errorf("generating key: %w", err)
+		return fmt.Errorf("opening key file: %w", err)
+	}
+	defer file.Close()
+
+	// limit PEM file size to 1 megabyte. This should be reasonable for
+	// almost any PEM file and prevents shenanigans like linking the file
+	// to /dev/random or something like that.
+	pemData, err := io.ReadAll(io.LimitReader(file, 1024*1024))
+	if err != nil {
+		return fmt.Errorf("reading auth private key: %w", err)
+	}
+
+	privateKey, err := jwt.ParseRSAPrivateKeyFromPEM(pemData)
+	if err != nil {
+		return fmt.Errorf("parsing auth private key: %w", err)
 	}
 
 	// Generating a token requires defining a set of claims. In this applications
@@ -67,7 +82,7 @@ func gentoken() error {
 	method := jwt.GetSigningMethod(jwt.SigningMethodRS256.Name)
 
 	token := jwt.NewWithClaims(method, claims)
-	token.Header["kid"] = "54bb2165-71e1-41a6-af3e-7da4a0e1e2c1"
+	token.Header["kid"] = "32e0b6e7-1a49-4041-87bc-397c17bbfb16"
 
 	str, err := token.SignedString(privateKey)
 	if err != nil {

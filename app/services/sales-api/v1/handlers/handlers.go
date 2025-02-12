@@ -9,6 +9,10 @@ import (
 type Routes struct{}
 
 // Add implements the RouterAdder interface.
-func (Routes) Add(app *web.App, cfg v1.APIMuxConfig) {
-	hackgroup.Routes(app)
+func (Routes) Add(app *web.App, apiCfg v1.APIMuxConfig) {
+	cfg := hackgroup.Config{
+		Auth: apiCfg.Auth,
+	}
+
+	hackgroup.Routes(app, cfg)
 }

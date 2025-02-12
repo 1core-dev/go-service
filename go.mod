@@ -1,8 +1,6 @@
 module github.com/1core-dev/go-service
 
-go 1.22.7
-
-toolchain go1.22.11
+go 1.23.6
 
 require (
 	github.com/ardanlabs/conf/v3 v3.2.0

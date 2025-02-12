@@ -3,10 +3,21 @@ package hackgroup
 import (
 	"net/http"
 
+	"github.com/1core-dev/go-service/business/web/v1/auth"
+	"github.com/1core-dev/go-service/business/web/v1/middlewares"
 	"github.com/1core-dev/go-service/foundation/web"
 )
 
+// Config contains all the mandatory systems required by handlers.
+type Config struct {
+	Auth *auth.Auth
+}
+
 // Routes add specific routes for this group.
-func Routes(app *web.App) {
+func Routes(app *web.App, cfg Config) {
+	authen := middlewares.Authenticate(cfg.Auth)
+	ruleAdmin := middlewares.Authorize(cfg.Auth, auth.RuleAdminOnly)
+
 	app.Handle(http.MethodGet, "/hack", Hack)
+	app.Handle(http.MethodGet, "/hackauth", Hack, authen, ruleAdmin)
 }
