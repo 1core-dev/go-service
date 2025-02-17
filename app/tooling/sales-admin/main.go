@@ -16,7 +16,7 @@ import (
 	"time"
 
 	"github.com/golang-jwt/jwt/v5"
-	"github.com/open-policy-agent/opa/v1/rego"
+	"github.com/open-policy-agent/opa/rego"
 )
 
 // Core OPA policies.
