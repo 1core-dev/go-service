@@ -3,7 +3,7 @@ SHELL_PATHS := /bin/ash /bin/zsh /bin/bash
 SHELL := $(firstword $(wildcard $(SHELL_PATHS)))
 
 # Define images/dependencies
-KIND := kindest/node:v1.29.12
+KIND := kindest/node:v1.29.14
 
 KIND_CLUSTER    := 1core-starter-cluster
 NAMESPACE       := sales-system
