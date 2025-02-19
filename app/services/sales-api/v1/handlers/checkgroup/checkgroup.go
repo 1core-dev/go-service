@@ -13,7 +13,7 @@ type Handlers struct {
 	build string
 }
 
-// New construct a Handlers API for the check group.
+// New constructs a Handlers API for the check group.
 func New(build string) *Handlers {
 	return &Handlers{
 		build: build,

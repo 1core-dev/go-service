@@ -13,7 +13,7 @@ type Config struct {
 
 // Routes adds specific routes for this group.
 func Routes(app *web.App, cfg Config) {
-	const version = "1"
+	const version = "v1"
 
 	handler := New(cfg.Build)
 	app.HandleNoMiddleware(http.MethodGet, version, "/readiness", handler.Readiness)
