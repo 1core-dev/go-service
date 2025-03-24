@@ -5,18 +5,21 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/1core-dev/go-service/foundation/logger"
 	"github.com/1core-dev/go-service/foundation/web"
 )
 
 // Handlers manages the set of check endpoints.
 type Handlers struct {
 	build string
+	log   *logger.Logger
 }
 
 // New constructs a Handlers api for the check group.
-func New(build string) *Handlers {
+func New(build string, log *logger.Logger) *Handlers {
 	return &Handlers{
 		build: build,
+		log:   log,
 	}
 }
 
@@ -24,6 +27,9 @@ func New(build string) *Handlers {
 // Do not respond by just returning an error because further up in the call
 // stack it will interpret that as a non-trusted error.
 func (h *Handlers) Readiness(ctx context.Context, w http.ResponseWriter, r *http.Request) error {
+
+	// TODO. Log when this fails
+
 	status := "ok"
 	statusCode := http.StatusOK
 
@@ -33,6 +39,8 @@ func (h *Handlers) Readiness(ctx context.Context, w http.ResponseWriter, r *http
 		Status: status,
 	}
 
+	h.log.Info(ctx, "readiness", "status", status)
+
 	return web.Respond(ctx, w, data, statusCode)
 }
 
@@ -41,6 +49,9 @@ func (h *Handlers) Readiness(ctx context.Context, w http.ResponseWriter, r *http
 // namespace details via the Downward API. The Kubernetes environment variables
 // need to be set within your Pod/Deployment manifest.
 func (h *Handlers) Liveness(ctx context.Context, w http.ResponseWriter, r *http.Request) error {
+
+	// TODO. Log when this fails
+
 	host, err := os.Hostname()
 	if err != nil {
 		host = "unavailable"
@@ -65,6 +76,8 @@ func (h *Handlers) Liveness(ctx context.Context, w http.ResponseWriter, r *http.
 		Namespace:  os.Getenv("KUBERNETES_NAMESPACE"),
 		GOMAXPROCS: os.Getenv("GOMAXPROCS"),
 	}
+
+	h.log.Info(ctx, "liveness", "status", "OK")
 
 	// This handler provides a free timer loop.
 
