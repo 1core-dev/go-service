@@ -97,7 +97,7 @@ dev-describe-sales:
 	kubectl describe pod --namespace=$(NAMESPACE) -l app=$(APP)
 
 dev-logs-db:
-kubectl logs --namespace=$(NAMESPACE) -l app=database --all-containers=true -f --tail=100
+	kubectl logs --namespace=$(NAMESPACE) -l app=database --all-containers=true -f --tail=100
 
 pgcli:
 	pgcli postgresql://postgres:postgres@localhost
