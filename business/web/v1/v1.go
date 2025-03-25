@@ -7,6 +7,7 @@ import (
 	"github.com/1core-dev/go-service/business/web/v1/middlewares"
 	"github.com/1core-dev/go-service/foundation/logger"
 	"github.com/1core-dev/go-service/foundation/web"
+	"github.com/jmoiron/sqlx"
 )
 
 // APIMuxConfig contains all the mandatory system required by handlers.
@@ -15,6 +16,7 @@ type APIMuxConfig struct {
 	Shutdown chan os.Signal
 	Log      *logger.Logger
 	Auth     *auth.Auth
+	DB       *sqlx.DB
 }
 
 // RouteAdder defines behavior that sets the routes to bind for an instance

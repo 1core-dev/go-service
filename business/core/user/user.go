@@ -3,12 +3,20 @@ package user
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"time"
 
 	"github.com/1core-dev/go-service/foundation/logger"
 	"github.com/google/uuid"
 	"golang.org/x/crypto/bcrypt"
+)
+
+// Set of error variables for CRUD operations.
+var (
+	ErrNotFound              = errors.New("user not found")
+	ErrUniqueEmail           = errors.New("email is not unique")
+	ErrAuthenticationFailure = errors.New("authentication failed")
 )
 
 // Storer interface declares the behavior this package needs to persists and
