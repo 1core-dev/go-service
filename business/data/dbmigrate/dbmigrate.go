@@ -56,7 +56,6 @@ func Seed(ctx context.Context, db *sqlx.DB) (err error) {
 			if errors.Is(errTx, sql.ErrTxDone) {
 				return
 			}
-
 			err = fmt.Errorf("rollback: %w", errTx)
 			return
 		}
