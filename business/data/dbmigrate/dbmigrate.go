@@ -8,10 +8,10 @@ import (
 	"errors"
 	"fmt"
 
+	sqldb "github.com/1core-dev/go-service/business/data/dbsql/pgx"
 	"github.com/ardanlabs/darwin/v3"
 	"github.com/ardanlabs/darwin/v3/dialects/postgres"
 	"github.com/ardanlabs/darwin/v3/drivers/generic"
-	"github.com/ardanlabs/service/business/sdk/sqldb"
 	"github.com/jmoiron/sqlx"
 )
 
