@@ -35,8 +35,14 @@ curl:
 	curl -il http://localhost:3000/v1/hack
 
 curl-auth:
-	curl -il -H "Authorization: Bearer ${TOKEN}" http://localhost:3000/v1/hackauth	
+	curl -il -H "Authorization: Bearer ${TOKEN}" http://localhost:3000/v1/hackauth
 
+curl-create:
+	curl -il -X POST -H 'Content-Type: application/json' \
+		-d '{"name":"Joe","email":"joe@foo.com","roles":["ADMIN"], \
+		"department":"IT","password":"42","passwordConfirm":"42"}' \
+		http://localhost:3000/v1/users
+		
 load:
 	hey -m GET -c 100 -n 100000 "http://localhost:3000/v1/hack"
 
