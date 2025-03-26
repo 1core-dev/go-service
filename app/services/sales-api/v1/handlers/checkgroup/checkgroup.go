@@ -4,22 +4,27 @@ import (
 	"context"
 	"net/http"
 	"os"
+	"time"
 
+	db "github.com/1core-dev/go-service/business/data/dbsql/pgx"
 	"github.com/1core-dev/go-service/foundation/logger"
 	"github.com/1core-dev/go-service/foundation/web"
+	"github.com/jmoiron/sqlx"
 )
 
 // Handlers manages the set of check endpoints.
 type Handlers struct {
 	build string
 	log   *logger.Logger
+	db    *sqlx.DB
 }
 
 // New constructs a Handlers api for the check group.
-func New(build string, log *logger.Logger) *Handlers {
+func New(build string, log *logger.Logger, db *sqlx.DB) *Handlers {
 	return &Handlers{
 		build: build,
 		log:   log,
+		db:    db,
 	}
 }
 
@@ -27,11 +32,16 @@ func New(build string, log *logger.Logger) *Handlers {
 // Do not respond by just returning an error because further up in the call
 // stack it will interpret that as a non-trusted error.
 func (h *Handlers) Readiness(ctx context.Context, w http.ResponseWriter, r *http.Request) error {
-
-	// TODO. Log when this fails
+	ctx, cancel := context.WithTimeout(ctx, time.Second)
+	defer cancel()
 
 	status := "ok"
 	statusCode := http.StatusOK
+	if err := db.StatusCheck(ctx, h.db); err != nil {
+		status = "db not ready"
+		statusCode = http.StatusInternalServerError
+		h.log.Info(ctx, "readiness failure", "status", status)
+	}
 
 	data := struct {
 		Status string `json:"status"`
