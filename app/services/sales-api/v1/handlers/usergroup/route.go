@@ -27,10 +27,13 @@ func Routes(app *web.App, cfg Config) {
 
 	authentication := middlewares.Authenticate(cfg.Auth)
 	ruleAdmin := middlewares.Authorize(cfg.Auth, auth.RuleAdminOnly)
+	ruleAdminOrSubject := middlewares.Authorize(cfg.Auth, auth.RuleAdminOrSubject)
 
 	usrCore := user.NewCore(cfg.Log, userdb.NewStore(cfg.Log, cfg.DB))
 
 	handler := New(usrCore, cfg.Auth)
 	app.Handle(http.MethodPost, version, "/users", handler.Create)
 	app.Handle(http.MethodPost, version, "/usersauth", handler.Create, authentication, ruleAdmin)
+	app.Handle(http.MethodGet, version, "/users", handler.Query, authentication, ruleAdmin)
+	app.Handle(http.MethodGet, version, "/users/:user_id", handler.QueryByID, authentication, ruleAdminOrSubject)
 }
