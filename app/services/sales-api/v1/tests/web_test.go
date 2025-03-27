@@ -2,14 +2,16 @@ package tests
 
 import (
 	"context"
+	"fmt"
 	"net/http"
 	"os"
-	"os/user"
 	"runtime/debug"
 	"testing"
 
 	"github.com/1core-dev/go-service/app/services/sales-api/v1/handlers"
+	"github.com/1core-dev/go-service/business/core/user"
 	"github.com/1core-dev/go-service/business/data/dbtest"
+	"github.com/1core-dev/go-service/business/data/order"
 	v1 "github.com/1core-dev/go-service/business/web/v1"
 )
 
@@ -56,7 +58,17 @@ func Test_Web(t *testing.T) {
 	// -------------------------------------------------------------------------
 
 	seed := func(ctx context.Context, api dbtest.CoreAPIs) (seedData, error) {
-		return seedData{}, nil
+		// TODO. Change with real seeding
+		usrs, err := api.User.Query(ctx, user.QueryFilter{}, order.By{Field: user.OrderByName, Direction: order.ASC}, 1, 2)
+		if err != nil {
+			return seedData{}, fmt.Errorf("seeding users : %w", err)
+		}
+
+		sd := seedData{
+			users: usrs,
+		}
+
+		return sd, nil
 	}
 
 	t.Log("Seeding data ...")
