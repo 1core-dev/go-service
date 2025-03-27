@@ -8,6 +8,7 @@ import (
 
 	"github.com/1core-dev/go-service/business/core/user"
 	"github.com/1core-dev/go-service/business/data/page"
+	"github.com/1core-dev/go-service/business/data/transaction"
 	"github.com/1core-dev/go-service/business/web/v1/auth"
 	"github.com/1core-dev/go-service/business/web/v1/response"
 	"github.com/1core-dev/go-service/foundation/web"
@@ -48,6 +49,54 @@ func (h *Handlers) Create(ctx context.Context, w http.ResponseWriter, r *http.Re
 	}
 
 	return web.Respond(ctx, w, toAppUser(usr), http.StatusCreated)
+}
+
+// CreateWithTran adds a new user to the system using database transactions.
+func (h *Handlers) CreateWithTran(ctx context.Context, w http.ResponseWriter, r *http.Request) error {
+	h, err := h.executeUnderTransaction(ctx)
+	if err != nil {
+		return err
+	}
+
+	var app AppNewUser
+	if err := web.Decode(r, &app); err != nil {
+		return response.NewError(err, http.StatusBadRequest)
+	}
+
+	nc, err := toCoreNewUser(app)
+	if err != nil {
+		return response.NewError(err, http.StatusBadRequest)
+	}
+
+	usr, err := h.user.Create(ctx, nc)
+	if err != nil {
+		if errors.Is(err, user.ErrUniqueEmail) {
+			return response.NewError(err, http.StatusConflict)
+		}
+		return fmt.Errorf("create: usr[%+v]: %w", usr, err)
+	}
+
+	return web.Respond(ctx, w, toAppUser(usr), http.StatusCreated)
+}
+
+// executeUnderTransaction constructs a new Handlers value with the core APIs
+// using a store transaction that was created via middleware.
+func (h *Handlers) executeUnderTransaction(ctx context.Context) (*Handlers, error) {
+	if tx, ok := transaction.Get(ctx); ok {
+		user, err := h.user.ExecuteUnderTransaction(tx)
+		if err != nil {
+			return nil, err
+		}
+
+		h = &Handlers{
+			user: user,
+			auth: h.auth,
+		}
+
+		return h, nil
+	}
+
+	return h, nil
 }
 
 // Query returns a list of users with paging.

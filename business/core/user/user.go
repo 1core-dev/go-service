@@ -9,6 +9,7 @@ import (
 	"time"
 
 	"github.com/1core-dev/go-service/business/data/order"
+	"github.com/1core-dev/go-service/business/data/transaction"
 	"github.com/1core-dev/go-service/foundation/logger"
 	"github.com/google/uuid"
 	"golang.org/x/crypto/bcrypt"
@@ -24,6 +25,7 @@ var (
 // Storer interface declares the behavior this package needs to persists and
 // retrieve data.
 type Storer interface {
+	ExecuteUnderTransaction(tx transaction.Transaction) (Storer, error)
 	Create(ctx context.Context, usr User) error
 	Query(ctx context.Context, filter QueryFilter, orderBy order.By, pageNumber int, rowsPerPage int) ([]User, error)
 	Count(ctx context.Context, filter QueryFilter) (int, error)
@@ -71,6 +73,22 @@ func (c *Core) Create(ctx context.Context, nu NewUser) (User, error) {
 	}
 
 	return usr, nil
+}
+
+// ExecuteUnderTransaction constructs a new Core value that will use the
+// specified transaction in any store related calls.
+func (c *Core) ExecuteUnderTransaction(tx transaction.Transaction) (*Core, error) {
+	trS, err := c.storer.ExecuteUnderTransaction(tx)
+	if err != nil {
+		return nil, err
+	}
+
+	c = &Core{
+		storer: trS,
+		log:    c.log,
+	}
+
+	return c, nil
 }
 
 // Query retrieves a list of existing users.
