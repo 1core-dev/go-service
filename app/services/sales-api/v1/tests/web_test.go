@@ -58,7 +58,6 @@ func Test_Web(t *testing.T) {
 	// -------------------------------------------------------------------------
 
 	seed := func(ctx context.Context, api dbtest.CoreAPIs) (seedData, error) {
-		// TODO. Change with real seeding
 		usrs, err := api.User.Query(ctx, user.QueryFilter{}, order.By{Field: user.OrderByName, Direction: order.ASC}, 1, 2)
 		if err != nil {
 			return seedData{}, fmt.Errorf("seeding users : %w", err)
