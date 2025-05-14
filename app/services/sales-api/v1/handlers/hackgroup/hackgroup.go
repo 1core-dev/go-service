@@ -7,7 +7,7 @@ import (
 	"net/http"
 
 	"github.com/1core-dev/go-service/business/web/v1/response"
-	"github.com/1core-dev/go-service/foundation/web"
+	"github.com/1core-dev/go-service/pkg/web"
 )
 
 func Hack(ctx context.Context, w http.ResponseWriter, r *http.Request) error {

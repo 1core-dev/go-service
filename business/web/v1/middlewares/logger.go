@@ -6,8 +6,8 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/1core-dev/go-service/foundation/logger"
-	"github.com/1core-dev/go-service/foundation/web"
+	"github.com/1core-dev/go-service/pkg/logger"
+	"github.com/1core-dev/go-service/pkg/web"
 )
 
 func Logger(log *logger.Logger) web.Middleware {

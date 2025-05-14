@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/1core-dev/go-service/foundation/validate"
+	"github.com/1core-dev/go-service/pkg/validate"
 )
 
 // Set of directions for data ordering.

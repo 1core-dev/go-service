@@ -1,10 +1,5 @@
-// +build !safe
-// +build !appengine
-// +build !ppc64le
-// +build !mipsle
-// +build !ppc64be
-// +build !mips
-// +build !s390x
+//go:build !safe && !appengine && !ppc64le && !mipsle && !ppc64be && !mips && !s390x
+// +build !safe,!appengine,!ppc64le,!mipsle,!ppc64be,!mips,!s390x
 
 package xxhash
 

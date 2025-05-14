@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/1core-dev/go-service/foundation/validate"
+	"github.com/1core-dev/go-service/pkg/validate"
 )
 
 // Page represents the requested page and rows per page.

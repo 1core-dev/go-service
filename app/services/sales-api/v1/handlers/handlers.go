@@ -5,7 +5,7 @@ import (
 	"github.com/1core-dev/go-service/app/services/sales-api/v1/handlers/hackgroup"
 	"github.com/1core-dev/go-service/app/services/sales-api/v1/handlers/usergroup"
 	v1 "github.com/1core-dev/go-service/business/web/v1"
-	"github.com/1core-dev/go-service/foundation/web"
+	"github.com/1core-dev/go-service/pkg/web"
 )
 
 type Routes struct{}

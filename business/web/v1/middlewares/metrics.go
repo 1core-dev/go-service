@@ -5,7 +5,7 @@ import (
 	"net/http"
 
 	"github.com/1core-dev/go-service/business/web/v1/metrics"
-	"github.com/1core-dev/go-service/foundation/web"
+	"github.com/1core-dev/go-service/pkg/web"
 )
 
 // Metrics updates program counters.

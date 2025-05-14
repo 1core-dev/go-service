@@ -6,9 +6,9 @@ import (
 
 	"github.com/1core-dev/go-service/business/web/v1/auth"
 	"github.com/1core-dev/go-service/business/web/v1/response"
-	"github.com/1core-dev/go-service/foundation/logger"
-	"github.com/1core-dev/go-service/foundation/validate"
-	"github.com/1core-dev/go-service/foundation/web"
+	"github.com/1core-dev/go-service/pkg/logger"
+	"github.com/1core-dev/go-service/pkg/validate"
+	"github.com/1core-dev/go-service/pkg/web"
 )
 
 // Errors handle errors coming out of the call chain. It detects normal

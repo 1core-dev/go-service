@@ -8,8 +8,8 @@ import (
 	"net/http"
 
 	"github.com/1core-dev/go-service/business/data/transaction"
-	"github.com/1core-dev/go-service/foundation/logger"
-	"github.com/1core-dev/go-service/foundation/web"
+	"github.com/1core-dev/go-service/pkg/logger"
+	"github.com/1core-dev/go-service/pkg/web"
 )
 
 // ExecuteInTransation starts a transaction around all the storage calls within

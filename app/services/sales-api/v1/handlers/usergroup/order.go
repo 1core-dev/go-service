@@ -6,7 +6,7 @@ import (
 
 	"github.com/1core-dev/go-service/business/core/user"
 	"github.com/1core-dev/go-service/business/data/order"
-	"github.com/1core-dev/go-service/foundation/validate"
+	"github.com/1core-dev/go-service/pkg/validate"
 )
 
 func parseOrder(r *http.Request) (order.By, error) {

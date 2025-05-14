@@ -5,7 +5,7 @@ import (
 	"testing"
 
 	"github.com/1core-dev/go-service/business/data/dbtest"
-	"github.com/1core-dev/go-service/foundation/docker"
+	"github.com/1core-dev/go-service/pkg/docker"
 )
 
 var c *docker.Container

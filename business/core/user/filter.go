@@ -5,7 +5,7 @@ import (
 	"net/mail"
 	"time"
 
-	"github.com/1core-dev/go-service/foundation/validate"
+	"github.com/1core-dev/go-service/pkg/validate"
 	"github.com/google/uuid"
 )
 

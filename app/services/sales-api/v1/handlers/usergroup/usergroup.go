@@ -11,7 +11,7 @@ import (
 	"github.com/1core-dev/go-service/business/data/transaction"
 	"github.com/1core-dev/go-service/business/web/v1/auth"
 	"github.com/1core-dev/go-service/business/web/v1/response"
-	"github.com/1core-dev/go-service/foundation/web"
+	"github.com/1core-dev/go-service/pkg/web"
 )
 
 // Handlers manages the set of user endpoints.

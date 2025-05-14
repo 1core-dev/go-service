@@ -7,7 +7,7 @@ import (
 
 	"github.com/1core-dev/go-service/business/web/v1/auth"
 	"github.com/1core-dev/go-service/business/web/v1/response"
-	"github.com/1core-dev/go-service/foundation/web"
+	"github.com/1core-dev/go-service/pkg/web"
 	"github.com/google/uuid"
 )
 

@@ -12,7 +12,7 @@ import (
 
 	"github.com/1core-dev/go-service/business/core/user"
 	"github.com/1core-dev/go-service/business/core/user/stores/userdb"
-	"github.com/1core-dev/go-service/foundation/logger"
+	"github.com/1core-dev/go-service/pkg/logger"
 	"github.com/golang-jwt/jwt/v5"
 	"github.com/google/uuid"
 	"github.com/jmoiron/sqlx"

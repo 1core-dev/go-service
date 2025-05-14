@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/1core-dev/go-service/business/core/user"
-	"github.com/1core-dev/go-service/foundation/validate"
+	"github.com/1core-dev/go-service/pkg/validate"
 )
 
 // AppUser represents information about an individual user.

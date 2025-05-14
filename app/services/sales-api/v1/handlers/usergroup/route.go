@@ -8,8 +8,8 @@ import (
 	db "github.com/1core-dev/go-service/business/data/dbsql/pgx"
 	"github.com/1core-dev/go-service/business/web/v1/auth"
 	"github.com/1core-dev/go-service/business/web/v1/middlewares"
-	"github.com/1core-dev/go-service/foundation/logger"
-	"github.com/1core-dev/go-service/foundation/web"
+	"github.com/1core-dev/go-service/pkg/logger"
+	"github.com/1core-dev/go-service/pkg/web"
 
 	"github.com/jmoiron/sqlx"
 )

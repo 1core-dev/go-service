@@ -3,8 +3,8 @@ package checkgroup
 import (
 	"net/http"
 
-	"github.com/1core-dev/go-service/foundation/logger"
-	"github.com/1core-dev/go-service/foundation/web"
+	"github.com/1core-dev/go-service/pkg/logger"
+	"github.com/1core-dev/go-service/pkg/web"
 	"github.com/jmoiron/sqlx"
 )
 

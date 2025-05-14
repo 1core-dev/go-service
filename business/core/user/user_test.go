@@ -10,7 +10,7 @@ import (
 
 	"github.com/1core-dev/go-service/business/core/user"
 	"github.com/1core-dev/go-service/business/data/dbtest"
-	"github.com/1core-dev/go-service/foundation/docker"
+	"github.com/1core-dev/go-service/pkg/docker"
 	"github.com/google/uuid"
 )
 

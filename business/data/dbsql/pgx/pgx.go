@@ -10,7 +10,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/1core-dev/go-service/foundation/logger"
+	"github.com/1core-dev/go-service/pkg/logger"
 	"github.com/jackc/pgx/v5/pgconn"
 	_ "github.com/jackc/pgx/v5/stdlib"
 	"github.com/jmoiron/sqlx"

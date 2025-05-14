@@ -17,9 +17,9 @@ import (
 	v1 "github.com/1core-dev/go-service/business/web/v1"
 	"github.com/1core-dev/go-service/business/web/v1/auth"
 	"github.com/1core-dev/go-service/business/web/v1/debug"
-	"github.com/1core-dev/go-service/foundation/keystore"
-	"github.com/1core-dev/go-service/foundation/logger"
-	"github.com/1core-dev/go-service/foundation/web"
+	"github.com/1core-dev/go-service/pkg/keystore"
+	"github.com/1core-dev/go-service/pkg/logger"
+	"github.com/1core-dev/go-service/pkg/web"
 	"github.com/ardanlabs/conf/v3"
 )
 
